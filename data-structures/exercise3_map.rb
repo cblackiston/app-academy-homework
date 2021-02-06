@@ -4,7 +4,13 @@ class Map
     end
 
     def set(key, value)
-        @map << [key,value] if @map.none?{ |pair| pair.first == key }
+        matching_index = @map.index { |pair| pair.first == key }
+        if matching_index
+            @map[matching_index][1] = value
+        else
+            @map << [key,value]
+        end
+        value
     end
 
     def get(key)
